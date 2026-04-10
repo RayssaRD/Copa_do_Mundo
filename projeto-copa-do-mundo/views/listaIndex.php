@@ -14,6 +14,7 @@
                 <th>Nome</th>
                 <th>grupo</th>
                 <th>titulos</th>
+                <th>Criado em</th>
             </tr>
         </thead> 
         <tbody>
@@ -22,7 +23,7 @@
                 <td><?= htmlspecialchars($selecao['nome']) ?></td>
                 <td><?= htmlspecialchars($selecao['grupo']) ?></td>
                 <td><?= htmlspecialchars($selecao['titulos']) ?></td>
-
+                <td><?= htmlspecialchars($selecao['criado_em']) ?></td>
             </tr>
             <?php endforeach; ?>
         </tbody>

@@ -9,7 +9,7 @@
             $this ->conn = $db; //conn= instância o banco de dados
         }
 
-        //listar todas as selecoes (READ)
+        //listar todas as selecoes (READ)sssss
         public function buscarTodos(){
             $query = "SELECT * FROM " . $this->table. " ORDER BY nome ASC"; //ASC: Ordem alfabética
             $stmt = $this->conn->prepare($query); //prepara a consulta SQL
@@ -28,25 +28,28 @@
             $stmt -> bindParam(':nome', $dados['nome']);
             $stmt -> bindParam(':grupo', $dados['grupo']);
             $stmt -> bindParam(':titulos', $dados['titulos']);
-            $stmt -> bindParam(':criado_em', $dados['criado em']);
+            $stmt -> bindParam(':criado_em', $dados['criado_em']);
 
             return $stmt->execute();
         }
             // UPDATE
         public function atualizarDados($dados){
-            $query = "UPDATE " . $this->table. "
-                SET nome =:nome, grupo = :grupo, titulos = :titulos, criado em = :criado_em
+    // Remova o espaço de "criado em" na query SQL [cite: 69]
+    $query = "UPDATE " . $this->table. "
+                SET nome = :nome, grupo = :grupo, titulos = :titulos, criado_em = :criado_em
                 WHERE id = :id";
 
-            $stmt = $this->conn->prepare($query);
-            //Blindar SQL
-            $stmt -> bindParam(':nome', $dados['nome']);
-            $stmt -> bindParam(':grupo', $dados['grupo']);
-            $stmt -> bindParam(':titulos', $dados['titulos']);
-            $stmt -> bindParam(':criado_em', $dados['criado em']);
-            $stmt -> bindParam(':id', $dados['id']);
-            return $stmt->execute();
-        }
+    $stmt = $this->conn->prepare($query);
+    
+    // Ajuste o bindParam para usar a chave correta sem espaço
+    $stmt->bindParam(':nome', $dados['nome']);
+    $stmt->bindParam(':grupo', $dados['grupo']);
+    $stmt->bindParam(':titulos', $dados['titulos']);
+    $stmt->bindParam(':criado_em', $dados['criado_em']); // Aqui!
+    $stmt->bindParam(':id', $dados['id']);
+    
+    return $stmt->execute();
+}
             //READ ONE 
         public function buscarPorId($id) {
             $query = "SELECT * FROM " .$this->table . " WHERE id= ? LIMIT 0,1";

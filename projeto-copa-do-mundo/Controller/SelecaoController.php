@@ -30,8 +30,10 @@ class SelecaoController {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $dados = [
                 'nome'  => htmlspecialchars(trim($_POST['nome']), ENT_QUOTES, 'UTF-8'),
-                'grupo'  => htmlspecialchars(trim($_POST['grupo']), ENT_QUOTES, 'UTF-8'),
+                'rupo'  => htmlspecialchars(trim($_POST['grupo']), ENT_QUOTES, 'UTF-8'),
                 'titulos'  => htmlspecialchars(trim($_POST['titulos']), ENT_QUOTES, 'UTF-8'),
+                'criado em'  => htmlspecialchars(trim($_POST['criado_em']), ENT_QUOTES, 'UTF-8'),
+
             ];
 
             //VALIDANDO 
@@ -58,11 +60,11 @@ class SelecaoController {
     }
 
     public function criar(){
-        require_once './View/.php';
+        require_once './views/create.php';
     }
 
     public function editar($id){
-        $selecao = $this->estudante->buscarPorId($id);
+        $selecao = $this->selecao->buscarPorId($id);
         if ($selecao) {
             require_once './View/edit.php';
         } else {
@@ -76,7 +78,9 @@ class SelecaoController {
                 'id'    => (int)$_POST['id'],
                 'nome'  => htmlspecialchars(trim($_POST['nome']), ENT_QUOTES, 'UTF-8'),
                 'grupo'  => htmlspecialchars(trim($_POST['grupo']), ENT_QUOTES, 'UTF-8'),
-                'titulos'  => htmlspecialchars(trim($_POST['titulos']), ENT_QUOTES, 'UTF-8')
+                'titulos'  => htmlspecialchars(trim($_POST['titulos']), ENT_QUOTES, 'UTF-8'),
+                'cadastrado em'  => htmlspecialchars(trim($_POST['cadastrado em']), ENT_QUOTES, 'UTF-8'),
+
             ];
 
             if($this->estudante->atualizarDados($dados)){
@@ -86,7 +90,7 @@ class SelecaoController {
     }
 
     public function deletar($id) {
-        if ($this->estudante-> deletar($id)){
+        if ($this->selecao-> deletar($id)){
             header("Location: index.php?status=sucesso&msg=Excluído!");
         }
     }

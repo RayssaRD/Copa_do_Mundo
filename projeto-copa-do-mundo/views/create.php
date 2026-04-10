@@ -10,19 +10,19 @@
     <form method="POST" action="index.php?acao=salvar">
         <p>
             <label>Nome:</label><br>
-            <input type="text" name="Nome" required>
+            <input type="text" name="nome" required>
         </p>
         <p>
             <label>grupo:</label><br>
-            <input type="text" name="Grupo" required>
+            <input type="text" name="grupo" required>
         </p>
         <p>
             <label>titulos:</label><br>
-            <input type="text" name="Títulos" required>
+            <input type="text" name="títulos" required>
         </p>
         <p>
             <label>cadastrado em:</label><br>
-            <input type="text" name="cadastrado_em" required>
+            <input type="text" name="criado em" required>
         </p>
 
         <button type="submit">Salvar seleção</button>
